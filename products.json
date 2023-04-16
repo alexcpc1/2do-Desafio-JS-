@@ -1,40 +1,38 @@
 [
-  [
-    {
-      "title": "Risotto",
-      "descripcion": "Risotto de Champiñones 40Gr",
-      "price": 3000,
-      "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg",
-      "code": "1010",
-      "stock": 40,
-      "id": 1
-    },
-    {
-      "title": "Cereal",
-      "descripcion": "Cereal Infantil Nestum Frutilla - 250GR",
-      "price": 6000,
-      "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20386774-qf9cW0sV-medium.png",
-      "code": "1012",
-      "stock": 100,
-      "id": 2
-    },
-    {
-      "title": "Mantequilla",
-      "descripcion": "Mantequilla con Sal - 250 GR",
-      "price": 4000,
-      "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/4011088-aosxGOr0-medium.jpg",
-      "code": "1014",
-      "stock": 20,
-      "id": 3
-    },
-    {
-      "title": "Queso",
-      "descripcion": "Queso Gauda Laminado - 500 GR",
-      "price": 4000,
-      "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20211526-38YL_0zf-medium.jpg",
-      "code": "1012",
-      "stock": 300,
-      "id": 5
-    }
-  ]
+  {
+    "title": "Cereal",
+    "descripcion": "Cereal Infantil Nestum Frutilla - 250GR",
+    "price": 6000,
+    "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20386774-qf9cW0sV-medium.png",
+    "code": "1012",
+    "stock": 100,
+    "id": 1
+  },
+  {
+    "title": "Chorizo",
+    "descripcion": "Chorizo Parrillero - 20 Und",
+    "price": 4000,
+    "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20050239-Oy6zFS-p-medium.jpg",
+    "code": "1016",
+    "stock": 30,
+    "id": 3
+  },
+  {
+    "title": "Risotto",
+    "descripcion": "Risotto de Champiñones 40Gr",
+    "price": 3000,
+    "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg",
+    "code": "1010",
+    "stock": 40,
+    "id": 5
+  },
+  {
+    "title": "Pasta",
+    "descripcion": "pasta larga 200Gr",
+    "price": 1000,
+    "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg",
+    "code": "1033",
+    "stock": 10,
+    "id": 6
+  }
 ]
