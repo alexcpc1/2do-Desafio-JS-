@@ -25,24 +25,14 @@ class ProductManager {
         if(!title || !descripcion || !price || !thumbnail|| !code || !stock){
          return console.log("Todos los campos deben ser Obligatorios");
         }
-
-        //const codeExists =  this.path.some((element) => element.code === code);
-        //if(codeExists){
-           // return console.log("Ya existe un producto con este Codigo")
-        //};
-
         try{
             if(this.fileExists()){
                 const content = await fs.promises.readFile(this.path, "utf-8");
                 const products = JSON.parse(content);
-               
-                // La validación se hace aqui, despues de tener la lista de productos de la línea anterior, la 37 ps,
-                // hace un filter para saber si ya existe el code, si es 0 no existe, si esta mayor a 0 si existe
+                // hice un filter para saber si ya existe el code, si es 0 no existe, si esta mayor a 0 si existe
                 if (products.filter(obj => obj.code == code).length < 1) { 
                 const productId = this.generateId(products);
-                //Creas el objeto
-                var product = new Object();
-                //le agregas las keys o atributos que vienen de la línea 23    
+                var product = new Object();  
                 product.title = title;
                 product.descripcion = descripcion;
                 product.price = price;
@@ -50,7 +40,6 @@ class ProductManager {
                 product.code = code;
                 product.stock = stock;             
                 product.id = productId;
-                // Lo agregas a los productos
                 products.push(product);
                 //Actualiza el archivo de los productos          
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
