@@ -52,5 +52,32 @@
     "code": "1018",
     "stock": 2000,
     "id": 9
+  },
+  {
+    "title": "Pizza",
+    "descripcion": "Pizza de peperoni mediana",
+    "price": 5500,
+    "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20211526-38YL_0zf-medium.jpg",
+    "code": "3333",
+    "stock": 8800,
+    "id": 10
+  },
+  {
+    "title": "Vianesa",
+    "descripcion": "Vianesa de pollo - 20 Und",
+    "price": 9999,
+    "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20050239-Oy6zFS-p-medium.jpg",
+    "code": "777",
+    "stock": 30,
+    "id": 11
+  },
+  {
+    "title": "Yogurt",
+    "descripcion": "Yogurt de durazno 100Gr",
+    "price": 9999,
+    "thumbnail": "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20050239-Oy6zFS-p-medium.jpg",
+    "code": "44444",
+    "stock": 888,
+    "id": 12
   }
 ]

@@ -24,16 +24,25 @@ class ProductManager {
         
         if(!title || !descripcion || !price || !thumbnail|| !code || !stock){
          return console.log("Todos los campos deben ser Obligatorios");
-        }     
+        }
+
+        //const codeExists =  this.path.some((element) => element.code === code);
+        //if(codeExists){
+           // return console.log("Ya existe un producto con este Codigo")
+        //};
+
         try{
             if(this.fileExists()){
                 const content = await fs.promises.readFile(this.path, "utf-8");
                 const products = JSON.parse(content);
-
+               
+                // La validación se hace aqui, despues de tener la lista de productos de la línea anterior, la 37 ps,
+                // hace un filter para saber si ya existe el code, si es 0 no existe, si esta mayor a 0 si existe
                 if (products.filter(obj => obj.code == code).length < 1) { 
                 const productId = this.generateId(products);
-                
-                let product = new Object();  
+                //Creas el objeto
+                var product = new Object();
+                //le agregas las keys o atributos que vienen de la línea 23    
                 product.title = title;
                 product.descripcion = descripcion;
                 product.price = price;
@@ -41,7 +50,7 @@ class ProductManager {
                 product.code = code;
                 product.stock = stock;             
                 product.id = productId;
-                // se agrega a los productos
+                // Lo agregas a los productos
                 products.push(product);
                 //Actualiza el archivo de los productos          
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
@@ -150,14 +159,14 @@ const manager = new ProductManager("./products.json");
 
 const functionPrincipal = async()=>{
     try{
-        // const productAdded1 = await manager.addProduct({title: "Cereal", descripcion:   "Cereal Infantil Nestum Frutilla - 250GR", price: 6000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20386774-qf9cW0sV-medium.png",  code: "1012", stock: 100});
-        // const productAdded2 = await manager.addProduct({title: "Mantequilla", descripcion:   "Mantequilla con Sal - 250 GR", price: 1500, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/4011088-aosxGOr0-medium.jpg",  code: "1014", stock: 20});
-        // const productAdded3 = await manager.addProduct({title: "Chorizo", descripcion:  "Chorizo Parrillero - 20 Und", price: 2000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20050239-Oy6zFS-p-medium.jpg",  code: "1016", stock: 30});
-        // const productAdded4 = await manager.addProduct({title: "Queso", descripcion:  "Queso Gauda Laminado - 500 GR", price: 4000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20211526-38YL_0zf-medium.jpg",  code: "1018", stock: 300});
-        const productAdded5 = await manager.addProduct("Arroz", "Arroz grano entero 500Gr", 500, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", "1018", 2000); 
-        // campos imcompletos:
-        const productAdded6 = await manager.addProduct({title: "Pasta", descripcion: "pasta larga 200Gr", price: 1000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", stock: 10});
-        // console.log("productAdded6; ", productAdded6);
+        // const productAdded1 = await manager.addProduct("Cereal", "Cereal Infantil Nestum Frutilla - 250GR", 6000, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20386774-qf9cW0sV-medium.png", "1012", 100});
+        // const productAdded2 = await manager.addProduct("Mantequilla",  "Mantequilla con Sal - 250 GR", 1500, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/4011088-aosxGOr0-medium.jpg", "1014", 20});
+        // const productAdded3 = await manager.addProduct("Chorizo", "Chorizo Parrillero - 20 Und",  2000, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20050239-Oy6zFS-p-medium.jpg", "1016",  30});
+        // const productAdded4 = await manager.addProduct("Pizza", "Pizza de peperoni mediana", "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20211526-38YL_0zf-medium.jpg", "3333", 8800});
+        const productAdded5 = await manager.addProduct("Yogurt", "Yogurt de durazno 100Gr", 9999, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20050239-Oy6zFS-p-medium.jpg", "44444", 888); 
+        // producto imcompleto:
+        const productAdded6 = await manager.addProduct("Pasta", "pasta larga 200Gr", 1000, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", 10);
+        // console.log("productAdded5; ", productAdded5);
         // const product1 = await manager.getProductById(1);
         // // console.log("product1: ", product1);
         // const product2 = await manager.getProductById(3);
@@ -167,7 +176,7 @@ const functionPrincipal = async()=>{
         // const resultado2 = await manager.getProducts();
         // // console.log("resultado2: ", resultado2);
         const productDelete = await manager.deleteProduct(8);
-        console.log("productDelete: ", productDelete);
+        // console.log("productDelete: ", productDelete);
         
     } catch(error){
         console.log(error.message);
