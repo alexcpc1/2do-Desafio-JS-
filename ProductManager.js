@@ -3,7 +3,7 @@ const fs = require("fs");
 
 class ProductManager {
     constructor(pathName){
-        this.path=pathName;
+        this.path = pathName;
    
     }
     fileExists(){
@@ -13,30 +13,43 @@ class ProductManager {
     generateId(products){
         let newId;
         if(!products.length){
-            newId=1;
+            newId = 1;
         } else{
-            newId = products[products.length-1].id+1;
+            newId = products[products.length - 1].id + 1;
         }
         return newId;
     }
 
-    async addProduct (title, description, price, thumbnail, code, stock){
-        if(!title || !description || !price || !thumbnail|| !code || !stock){
-        // return console.log("Todos los campos deben ser Obligatorios");
-        }
-        const codeExists =  this.path.some((element) => element.code === code);
-        if(codeExists){
-            return console.log("Ya existe un producto con este Codigo")
-        };
+    async addProduct (title, descripcion, price, thumbnail, code, stock){
+        
+        if(!title || !descripcion || !price || !thumbnail|| !code || !stock){
+         return console.log("Todos los campos deben ser Obligatorios");
+        }     
         try{
             if(this.fileExists()){
                 const content = await fs.promises.readFile(this.path, "utf-8");
-                const products =JSON.parse(content);
+                const products = JSON.parse(content);
+
+                if (products.filter(obj => obj.code == code).length < 1) { 
                 const productId = this.generateId(products);
+                
+                let product = new Object();  
+                product.title = title;
+                product.descripcion = descripcion;
+                product.price = price;
+                product.thumbnail = thumbnail;
+                product.code = code;
+                product.stock = stock;             
                 product.id = productId;
+                // se agrega a los productos
                 products.push(product);
+                //Actualiza el archivo de los productos          
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
                 return product;
+               } else {
+                //En caso de que exista lanza el log y no agrega el producto ni actualiza el archivo de productos!
+                return console.log("Ya existe un producto con este Codigo");
+               }                
             } else {
                 const productId = this.generateId([]);
                 product.id = productId;
@@ -140,10 +153,10 @@ const functionPrincipal = async()=>{
         // const productAdded1 = await manager.addProduct({title: "Cereal", descripcion:   "Cereal Infantil Nestum Frutilla - 250GR", price: 6000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20386774-qf9cW0sV-medium.png",  code: "1012", stock: 100});
         // const productAdded2 = await manager.addProduct({title: "Mantequilla", descripcion:   "Mantequilla con Sal - 250 GR", price: 1500, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/4011088-aosxGOr0-medium.jpg",  code: "1014", stock: 20});
         // const productAdded3 = await manager.addProduct({title: "Chorizo", descripcion:  "Chorizo Parrillero - 20 Und", price: 2000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20050239-Oy6zFS-p-medium.jpg",  code: "1016", stock: 30});
-        // const productAdded4 = await manager.addProduct({title: "Queso", descripcion:  "Queso Gauda Laminado - 500 GR", price: 4000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20211526-38YL_0zf-medium.jpg",  code: "1012", stock: 300});
-        const productAdded5 = await manager.addProduct({title: "Leche", descripcion: "Risotto de Champiñones 40Gr", price: 3000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", code: "1016", stock: 120});
-        // producto imcompleto:
-        // const productAdded6 = await manager.addProduct({title: "Pasta", descripcion: "pasta larga 200Gr", price: 1000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", stock: 10});
+        // const productAdded4 = await manager.addProduct({title: "Queso", descripcion:  "Queso Gauda Laminado - 500 GR", price: 4000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20211526-38YL_0zf-medium.jpg",  code: "1018", stock: 300});
+        const productAdded5 = await manager.addProduct("Arroz", "Arroz grano entero 500Gr", 500, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", "1018", 2000); 
+        // campos imcompletos:
+        const productAdded6 = await manager.addProduct({title: "Pasta", descripcion: "pasta larga 200Gr", price: 1000, thumbnail: "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", stock: 10});
         // console.log("productAdded6; ", productAdded6);
         // const product1 = await manager.getProductById(1);
         // // console.log("product1: ", product1);
@@ -153,12 +166,11 @@ const functionPrincipal = async()=>{
         // // console.log("resultado: ", resultado);
         // const resultado2 = await manager.getProducts();
         // // console.log("resultado2: ", resultado2);
-        // const resultado3 = await manager.deleteProduct(7);
-        // console.log("resultado3: ", resultado3 );
+        const productDelete = await manager.deleteProduct(8);
+        console.log("productDelete: ", productDelete);
         
     } catch(error){
         console.log(error.message);
     }
-    
 }
 functionPrincipal();
