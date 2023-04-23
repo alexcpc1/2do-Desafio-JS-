@@ -41,7 +41,7 @@ class ProductManager {
                 product.stock = stock;             
                 product.id = productId;
                 products.push(product);
-                //Actualiza el archivo de los productos          
+                //se actualiza el archivo de los productos          
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
                 return product;
                } else {
@@ -156,16 +156,16 @@ const functionPrincipal = async()=>{
         // producto imcompleto:
         const productAdded6 = await manager.addProduct("Pasta", "pasta larga 200Gr", 1000, "https://7483c243aa9da28f329c-903e05bc00667eb97d832a11f670edad.ssl.cf1.rackcdn.com/20548165-LhlJB88C-medium.jpg", 10);
         // console.log("productAdded5; ", productAdded5);
-        // const product1 = await manager.getProductById(1);
+        const product1 = await manager.getProductById(1);
         // // console.log("product1: ", product1);
         // const product2 = await manager.getProductById(3);
         // // console.log("product2: ", product2);
-        // const resultado = await manager.updateProduct(3,{price:4000});
+        const resultado = await manager.updateProduct(3,{price:4000});
         // // console.log("resultado: ", resultado);
-        // const resultado2 = await manager.getProducts();
+        const resultado2 = await manager.getProducts();
         // // console.log("resultado2: ", resultado2);
         const productDelete = await manager.deleteProduct(8);
-        // console.log("productDelete: ", productDelete);
+        console.log("productDelete: ", productDelete);
         
     } catch(error){
         console.log(error.message);
